@@ -5,6 +5,7 @@
         "build": "vite build"
     },
     "devDependencies": {
+        "puppeteer": "^22.0.0",
         "@popperjs/core": "^2.11.6",
         "axios": "^1.1.2",
         "bootstrap": "^5.2.3",

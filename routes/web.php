@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PromotionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -36,4 +36,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/promotions/{promotion}/download', [PromotionController::class, 'download'])->name('promotions.download');
 
     Route::get('/promotions/{promotion}/regenerate', [PromotionController::class, 'regenerate'])->name('promotions.regenerate');
+    Route::get('/promotions/{promotion}/export-png', [PromotionController::class, 'exportPng'])->name('promotions.exportPng');
 });
