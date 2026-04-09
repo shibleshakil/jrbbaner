@@ -93,7 +93,7 @@
                             <div class="card-body table-responsive">
                                 <table class="table table-bordered text-center">
                                     <thead>
-                                        <tr>
+                                        <!-- <tr>
                                             <th colspan="2">Period</th>
                                             <th colspan="3">Room Type</th>
                                             <th rowspan="2" style="transform: rotate(-45deg);">Meals</th>
@@ -104,11 +104,17 @@
                                             <th>Double</th>
                                             <th>Triple</th>
                                             <th>Quad</th>
+                                        </tr> -->
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Total Offer</th>
+                                            <th>Banner</th>
+                                            <th>Download</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @forelse ($promotions as $promotion)
-                                        @forelse ($promotion->offerDetails as $offerDetail)
+                                        <!-- @forelse ($promotion->offerDetails as $offerDetail)
                                         <tr>
                                             <td>{{ $offerDetail->from_date }}</td>
                                             <td>{{ $offerDetail->to_date }}</td>
@@ -120,9 +126,9 @@
 
                                         @empty
 
-                                        @endforelse
-                                        <!-- <tr>
-                                            <td>{{ $promotion->id }}</td>
+                                        @endforelse -->
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td>{{ $promotion->offerDetails->count() }}</td>
                                             <td>
                                                 @if ($promotion->generated_banner_path)
@@ -136,7 +142,7 @@
                                                 <a class="btn btn-sm btn-success" href="{{ route('promotions.download', $promotion) }}">Download PNG</a>
                                                 @endif
                                             </td>
-                                        </tr> -->
+                                        </tr>
                                         @empty
                                         <tr>
                                             <td colspan="6" class="text-center">No banners created yet.</td>
