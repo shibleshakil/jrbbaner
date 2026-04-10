@@ -24,18 +24,18 @@ class PromotionBannerRenderer
         $white = imagecolorallocate($canvas, 255, 255, 255);
         imagefill($canvas, 0, 0, $white);
 
-        $heroPath = storage_path('app/public/'.$promotion->hero_banner_path);
-        $logoPath = storage_path('app/public/'.$promotion->logo_path);
+        $heroPath = storage_path('app/public/' . $promotion->hero_banner_path);
+        $logoPath = storage_path('app/public/' . $promotion->logo_path);
         $roomPaths = [
-            storage_path('app/public/'.$promotion->room_image_1_path),
-            storage_path('app/public/'.$promotion->room_image_2_path),
-            storage_path('app/public/'.$promotion->room_image_3_path),
-            storage_path('app/public/'.$promotion->room_image_4_path),
+            storage_path('app/public/' . $promotion->room_image_1_path),
+            storage_path('app/public/' . $promotion->room_image_2_path),
+            storage_path('app/public/' . $promotion->room_image_3_path),
+            storage_path('app/public/' . $promotion->room_image_4_path),
         ];
 
         $heroImage = $this->imageFromPath($heroPath);
         $logoImage = $this->imageFromPath($logoPath);
-        $roomImages = array_map(fn (string $path) => $this->imageFromPath($path), $roomPaths);
+        $roomImages = array_map(fn(string $path) => $this->imageFromPath($path), $roomPaths);
 
         if (! $heroImage || ! $logoImage || in_array(null, $roomImages, true)) {
             throw new RuntimeException('Uploaded images are invalid.');
@@ -69,8 +69,8 @@ class PromotionBannerRenderer
         $this->drawRoomImages($canvas, $roomImages);
         $this->drawFooter($canvas, $blue, $white);
 
-        $relativePath = 'generated-banners/promotion-'.$promotion->id.'.png';
-        $absolutePath = storage_path('app/public/'.$relativePath);
+        $relativePath = 'generated-banners/promotion-' . $promotion->id . '.png';
+        $absolutePath = storage_path('app/public/' . $relativePath);
         $dir = dirname($absolutePath);
         if (! is_dir($dir)) {
             mkdir($dir, 0755, true);
@@ -207,9 +207,9 @@ class PromotionBannerRenderer
         $termColor = imagecolorallocate($canvas, 28, 49, 63);
         $startY = 1062;
         foreach ($terms as $term) {
-            $this->drawText($canvas, 32, $startY, '* '.$term, 5, $termColor);
-            $this->drawText($canvas, 32, $startY + 1, '* '.$term, 5, $termColor);
-            $this->drawText($canvas, 33, $startY, '* '.$term, 5, $termColor);
+            $this->drawText($canvas, 32, $startY, '* ' . $term, 5, $termColor);
+            $this->drawText($canvas, 32, $startY + 1, '* ' . $term, 5, $termColor);
+            $this->drawText($canvas, 33, $startY, '* ' . $term, 5, $termColor);
             $startY += 30;
         }
     }
@@ -329,8 +329,7 @@ class PromotionBannerRenderer
         bool $roundTopRight = true,
         bool $roundBottomRight = true,
         bool $roundBottomLeft = true
-    ): void
-    {
+    ): void {
         // Use inclusive max bounds to avoid 1px overflow/missing seams.
         $x2 = $x + $w - 1;
         $y2 = $y + $h - 1;
@@ -428,7 +427,7 @@ class PromotionBannerRenderer
         $yearBadgeInnerPadX = 22;
 
         $line1 = '( Fareast Rate )';
-        $line2 = 'Jiwar Al SaAha Hotel';
+        $line2 = 'Jiwer Rawda For Hotel';
         // +1 accounts for bold second pass at x+1 when centering
         $vw1 = $this->measureTextWidth($line1, 5) + 1;
         $vw2 = $this->measureTextWidth($line2, 5) + 1;
@@ -444,18 +443,26 @@ class PromotionBannerRenderer
         $contentLeft = $x0 + $badgeInnerPadX;
 
         imagefilledpolygon($canvas, [
-            $x0, $yTop,
-            $topRight, $yTop,
-            $topRight - $skew, $yBot,
-            $x0 - $skew, $yBot,
+            $x0,
+            $yTop,
+            $topRight,
+            $yTop,
+            $topRight - $skew,
+            $yBot,
+            $x0 - $skew,
+            $yBot,
         ], 4, $blue);
 
         $iconRightTop = $contentLeft + $iconW;
         imagefilledpolygon($canvas, [
-            $contentLeft, $yTop,
-            $iconRightTop, $yTop,
-            $iconRightTop - $skew, $yBot,
-            $contentLeft - $skew, $yBot,
+            $contentLeft,
+            $yTop,
+            $iconRightTop,
+            $yTop,
+            $iconRightTop - $skew,
+            $yBot,
+            $contentLeft - $skew,
+            $yBot,
         ], 4, $darkBlue);
 
         $iconGraphicW = 20;
@@ -490,10 +497,14 @@ class PromotionBannerRenderer
         $yearX0 = $topRight + $badgeGap;
 
         imagefilledpolygon($canvas, [
-            $yearX0, $yTop,
-            $yearX0 + $yearW, $yTop,
-            $yearX0 + $yearW - $skew, $yBot,
-            $yearX0 - $skew, $yBot,
+            $yearX0,
+            $yTop,
+            $yearX0 + $yearW,
+            $yTop,
+            $yearX0 + $yearW - $skew,
+            $yBot,
+            $yearX0 - $skew,
+            $yBot,
         ], 4, $yearBlue);
 
         $yearTextX = $yearX0 + $yearBadgeInnerPadX + (int) max(0, floor(($yearContentInnerW - $vwYear) / 2));
@@ -514,8 +525,7 @@ class PromotionBannerRenderer
         bool $roundTopRight = true,
         bool $roundBottomRight = true,
         bool $roundBottomLeft = true
-    ): void
-    {
+    ): void {
         $temp = imagecreatetruecolor($dstW, $dstH);
         imagealphablending($temp, false);
         imagesavealpha($temp, true);
@@ -693,4 +703,3 @@ class PromotionBannerRenderer
         return imagecreatefromstring($content);
     }
 }
-

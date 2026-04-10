@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('promotions', function (Blueprint $table) {
             $table->id();
-            $table->string('hero_banner_path');
-            $table->string('logo_path');
+            $table->string('hero_banner_path')->nullable();
+            $table->string('logo_path')->nullable();
             $table->string('generated_banner_path')->nullable();
             $table->timestamps();
         });

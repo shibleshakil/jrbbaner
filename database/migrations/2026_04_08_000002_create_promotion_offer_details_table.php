@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedInteger('double_rate');
             $table->unsignedInteger('triple_rate');
             $table->unsignedInteger('quad_rate');
-            $table->string('meals', 20);
+            $table->string('meals', 20)->nullable();
             $table->unsignedTinyInteger('row_order')->default(1);
             $table->timestamps();
         });

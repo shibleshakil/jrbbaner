@@ -8,5 +8,26 @@
                     <span class="menu-title">Dashboard</span>
                 </a>
             </li>
+            <li class="nav-item has-sub {{ Request::routeIs('promotions.*') ? 'open' : '' }}">
+                <a href="#">
+                    <i class="feather icon-credit-card"></i>
+                    <span class="menu-title">Promotions</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="{{ Request::routeIs('promotions.*') ? 'active' : '' }}">
+                        <a href="{{ route('promotions.index') }}">
+                            <i class="feather icon-circle"></i>
+                            <span class="menu-item">Promotions</span>
+                        </a>
+                    </li>
+                    <li class="{{ Request::routeIs('promotions.create') ? 'active' : '' }}">
+                        <a href="{{ route('promotions.create') }}">
+                            <i class="feather icon-circle"></i>
+                            <span class="menu-item">Create Promotion</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
 </div>

@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::get('/promotions', [PromotionController::class, 'index'])->name('promotions.index');
+    Route::get('/promotions/create', [PromotionController::class, 'create'])->name('promotions.create');
     Route::post('/promotions', [PromotionController::class, 'store'])->name('promotions.store');
     Route::get('/promotions/{promotion}/preview', [PromotionController::class, 'preview'])->name('promotions.preview');
     Route::get('/promotions/{promotion}/download', [PromotionController::class, 'download'])->name('promotions.download');

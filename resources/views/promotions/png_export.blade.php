@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=1130">
     <title>Promotion {{ $promotion->id }}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Paprika&display=swap" rel="stylesheet">
     <style>
         * {
             box-sizing: border-box;
@@ -15,7 +16,7 @@
             margin: 0;
             padding: 0;
             width: 1130px;
-            /* height: 1600px; */
+            height: 1600px;
             overflow: hidden;
             font-family: 'Segoe UI', Roboto, Arial, sans-serif;
             background: #fff;
@@ -65,7 +66,7 @@
             pointer-events: none;
 
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%2395c7d6' stroke-width='0.8' opacity='0.35'%3E%3Ccircle cx='50' cy='0' r='50'/%3E%3Ccircle cx='50' cy='100' r='50'/%3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3Ccircle cx='50' cy='50' r='35'/%3E%3C/g%3E%3C/svg%3E");
-
+            /* background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%23064e75' stroke-width='0.8' opacity='0.35'%3E%3Ccircle cx='50' cy='0' r='50'/%3E%3Ccircle cx='50' cy='100' r='50'/%3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3Ccircle cx='50' cy='50' r='35'/%3E%3C/g%3E%3C/svg%3E"); */
             background-repeat: repeat;
             background-size: 100px 100px;
         }
@@ -101,11 +102,11 @@
             transform: skewX(14deg);
             display: flex;
             align-items: center;
-            gap: 0;
+            gap: 16px;
         }
 
         .badge-icon {
-            width: 64px;
+            width: 28px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -115,6 +116,7 @@
 
         .badge-icon svg {
             display: block;
+            transform: rotate(13deg);
         }
 
         .badge-text {
@@ -152,6 +154,7 @@
             color: #fff;
             font-size: 36px;
             font-weight: 700;
+            font-family: 'Paprika', cursive;
         }
 
         .rates-table-wrap {
@@ -191,6 +194,13 @@
             font-size: 18px;
             font-weight: 700;
             padding: 8px 0;
+        }
+        
+        .line-clamp-1 {
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+            overflow: hidden;
         }
 
         .terms-block {
@@ -239,7 +249,7 @@
         .room-card {
             height: 165px;
             position: relative;
-            border: 3px solid #08bfdf;
+            border: 3px dashed #08bfdf;
             overflow: hidden;
         }
 
@@ -363,13 +373,13 @@
                         </div>
                         <div class="badge-text">
                             <span class="l1">( Fareast Rate )</span>
-                            <span class="l2">Jiwar Al SaAha Hotel</span>
+                            <span class="l2">Jiwer Rawda For Hotel</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="badge-year">
-                <span>{{ \Carbon\Carbon::now()->format('Y') }}</span>
+                <span>1448</span>
             </div>
         </div>
 
@@ -404,7 +414,7 @@
                             <td>{{ $offer->double_rate }}</td>
                             <td>{{ $offer->triple_rate }}</td>
                             <td>{{ $offer->quad_rate }}</td>
-                            <td>{{ $offer->meals }}</td>
+                            <td class="line-clamp-1">{{ $offer->meals }}</td>
                             @else
                             <td>&nbsp;</td>
                             <td>&nbsp;</td>
