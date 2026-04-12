@@ -24,18 +24,6 @@
                             <div class="card-body table-responsive">
                                 <table class="table table-bordered text-center">
                                     <thead>
-                                        <!-- <tr>
-                                            <th colspan="2">Period</th>
-                                            <th colspan="3">Room Type</th>
-                                            <th rowspan="2" style="transform: rotate(-45deg);">Meals</th>
-                                        </tr>
-                                        <tr>
-                                            <th>From</th>
-                                            <th>To</th>
-                                            <th>Double</th>
-                                            <th>Triple</th>
-                                            <th>Quad</th>
-                                        </tr> -->
                                         <tr>
                                             <th>#</th>
                                             <th>Total Offer</th>
@@ -45,29 +33,18 @@
                                     </thead>
                                     <tbody>
                                         @forelse ($promotions as $promotion)
-                                        <!-- @forelse ($promotion->offerDetails as $offerDetail)
-                                        <tr>
-                                            <td>{{ $offerDetail->from_date }}</td>
-                                            <td>{{ $offerDetail->to_date }}</td>
-                                            <td>{{ $offerDetail->double_rate }}</td>
-                                            <td>{{ $offerDetail->triple_rate }}</td>
-                                            <td>{{ $offerDetail->quad_rate }}</td>
-                                            <td>{{ $offerDetail->meals }}</td>
-                                        </tr>
-
-                                        @empty
-
-                                        @endforelse -->
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>
-                                                <table>
+                                            <td class="p-0">
+                                                <table class="" style="width: 100%;">
                                                     <thead>
-                                                        <th>From</th>
-                                                        <th>To</th>
-                                                        <th>Double</th>
-                                                        <th>Triple</th>
-                                                        <th>Quad</th>
+                                                        <tr>
+                                                            <th>From</th>
+                                                            <th>To</th>
+                                                            <th>Double</th>
+                                                            <th>Triple</th>
+                                                            <th>Quad</th>
+                                                        </tr>
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($promotion->offerDetails as $offerDetail)

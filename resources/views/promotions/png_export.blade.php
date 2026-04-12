@@ -195,7 +195,7 @@
             font-weight: 700;
             padding: 8px 0;
         }
-        
+
         .line-clamp-1 {
             -webkit-line-clamp: 1;
             -webkit-box-orient: vertical;
@@ -325,6 +325,10 @@
             font-size: 24px;
             font-weight: 600;
         }
+
+        tbody tr:nth-child(odd) td {
+            background: #f6e23257;
+        }
     </style>
 </head>
 
@@ -405,26 +409,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @for ($i = 0; $i < $rowCount; $i++)
-                        @php $offer=$offers->get($i); @endphp
-                        <tr class="{{ $offer ? '' : 'empty' }}">
-                            @if ($offer)
-                            <td>{{ \Carbon\Carbon::parse($offer->from_date)->format('d-M-y') }}</td>
-                            <td>{{ \Carbon\Carbon::parse($offer->to_date)->format('d-M-y') }}</td>
-                            <td>{{ $offer->double_rate }}</td>
-                            <td>{{ $offer->triple_rate }}</td>
-                            <td>{{ $offer->quad_rate }}</td>
-                            <td class="line-clamp-1">{{ $offer->meals }}</td>
-                            @else
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                            @endif
-                        </tr>
-                        @endfor
+                    @foreach ($offers as $offer)
+                    <tr>
+                        <td>{{ \Carbon\Carbon::parse($offer->from_date)->format('d-M-y') }}</td>
+                        <td>{{ \Carbon\Carbon::parse($offer->to_date)->format('d-M-y') }}</td>
+                        <td>{{ $offer->double_rate }}</td>
+                        <td>{{ $offer->triple_rate }}</td>
+                        <td>{{ $offer->quad_rate }}</td>
+                        <td class="line-clamp-1">{{ $offer->meals }}</td>
+                    </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

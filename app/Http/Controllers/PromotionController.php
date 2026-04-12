@@ -34,22 +34,22 @@ class PromotionController extends Controller
             'room_image_3' => ['nullable', 'image'],
             'room_image_4' => ['nullable', 'image'],
             'offers' => ['required', 'array', 'min:1', 'max:5'],
-            'offers.*.from_date' => ['required', 'date'],
-            'offers.*.to_date' => ['required', 'date'],
+            'offers.*.from_date' => ['required', 'date', 'before:offers.*.to_date'],
+            'offers.*.to_date' => ['required', 'date', 'after:offers.*.from_date'],
             'offers.*.double_rate' => ['required', 'integer', 'min:1'],
             'offers.*.triple_rate' => ['required', 'integer', 'min:1'],
             'offers.*.quad_rate' => ['required', 'integer', 'min:1'],
             'offers.*.meals' => ['nullable', 'string', 'max:20'],
         ]);
 
-        foreach ($validated['offers'] as $offer) {
-            if (Carbon::parse($offer['to_date'])->lt(Carbon::parse($offer['from_date']))) {
-                return redirect()
-                    ->back()
-                    ->withInput()
-                    ->withErrors(['The "To" date must be greater than or equal to the "From" date.']);
-            }
-        }
+        // foreach ($validated['offers'] as $offer) {
+        //     if (Carbon::parse($offer['to_date'])->lt(Carbon::parse($offer['from_date']))) {
+        //         return redirect()
+        //             ->back()
+        //             ->withInput()
+        //             ->withErrors(['The "To" date must be greater than or equal to the "From" date.']);
+        //     }
+        // }
 
         $promotion = DB::transaction(function () use ($request, $validated) {
             $heroPath = $request->file('hero_banner') ? $request->file('hero_banner')->store('promotion-assets', 'public') : null;
