@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AvailabilityBannerController;
 use App\Http\Controllers\PromotionController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -38,4 +39,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/promotions/{promotion}/regenerate', [PromotionController::class, 'regenerate'])->name('promotions.regenerate');
     Route::get('/promotions/{promotion}/export-png', [PromotionController::class, 'exportPng'])->name('promotions.exportPng');
+
+    Route::get('/availability-banners', [AvailabilityBannerController::class, 'index'])->name('availability_banners.index');
+    Route::get('/availability-banners/create', [AvailabilityBannerController::class, 'create'])->name('availability_banners.create');
+    Route::post('/availability-banners', [AvailabilityBannerController::class, 'store'])->name('availability_banners.store');
+    Route::get('/availability-banners/{availability_banner}/preview', [AvailabilityBannerController::class, 'preview'])->name('availability_banners.preview');
+    Route::get('/availability-banners/{availability_banner}/download', [AvailabilityBannerController::class, 'download'])->name('availability_banners.download');
+    Route::get('/availability-banners/{availability_banner}', [AvailabilityBannerController::class, 'show'])->name('availability_banners.show');
 });

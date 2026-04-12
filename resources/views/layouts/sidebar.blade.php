@@ -28,6 +28,26 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item has-sub {{ Request::routeIs('availability_banners.*') ? 'open' : '' }}">
+                <a href="#">
+                    <i class="feather icon-image"></i>
+                    <span class="menu-title">Availability Banners</span>
+                </a>
+                <ul class="menu-content">
+                    <li class="{{ Request::routeIs('availability_banners.index') ? 'active' : '' }}">
+                        <a href="{{ route('availability_banners.index') }}">
+                            <i class="feather icon-circle"></i>
+                            <span class="menu-item">Banners</span>
+                        </a>
+                    </li>
+                    <li class="{{ Request::routeIs('availability_banners.create') ? 'active' : '' }}">
+                        <a href="{{ route('availability_banners.create') }}">
+                            <i class="feather icon-circle"></i>
+                            <span class="menu-item">Create banner</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>
 </div>
