@@ -58,14 +58,14 @@
             left: 50px;
             top: 0;
             width: 400px;
-            height: 1183px;
+            height: 1033px;
             background: rgb(11 80 121 / 67%);
         }
 
         .logo-panel .logo {
             position: absolute;
             left: 110px;
-            top: 30px;
+            top: 0;
             width: 180px;
             height: 180px;
             object-fit: contain;
@@ -73,7 +73,7 @@
 
         .img-div {
             position: absolute;
-            top: 230px;
+            top: 190px;
             width: 100%;
             height: auto;
             overflow: hidden;
@@ -90,7 +90,7 @@
 
         .side-footer {
             position: absolute;
-            bottom: 5px;
+            bottom: 20px;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -128,6 +128,7 @@
             font-size: 28px;
             font-weight: 800;
             letter-spacing: 0.06em;
+            text-transform: uppercase;
         }
 
 
@@ -155,6 +156,26 @@
             letter-spacing: -0.02em;
         }
 
+        .rate {
+            margin:10px 0 30px;
+        }
+
+        .room-rate {
+            text-align: center;
+            font-size: 42px;
+            font-weight: 800;
+            color: #0a3d6e;
+            position: relative;
+        }
+
+        .fb {
+            text-align: center;
+            font-size: 42px;
+            font-weight: 800;
+            color: #0a3d6e;
+            position: relative;
+        }
+
         .from-to {
             text-align: center;
             font-size: 56px;
@@ -179,17 +200,17 @@
         }
 
         .avilability img {
-            width: 660px;
+            width: 500px;
         }
 
         .footer {
             position: absolute;
-            left: 450px;
-            bottom: 20px;
-            width: 750px;
+            left: 0;
+            bottom: 2px;
+            width: 1200px;
             height: auto;
             color: #064e75;
-            padding: 5px 30px 0;
+            padding: 5px 50px 0 50px;
             font-size: 13px;
             border-top: 4px solid #064e75;
         }
@@ -245,10 +266,42 @@
     'Triple and quad occupancy will be through extra bed if standard room is not available.',
     'Rates are subject to change without prior notice.',
     ];
-    $contacts = [
-    ['+966597709206', 'Sahadath Khan'],
-    ['+966540802329', 'Abdur Rahman (Dhomi)'],
+    $fallbackContacts = [
+    ['number' => '+966597709206', 'name' => 'Sahadath Khan', 'location' => 'Madinah'],
+    ['number' => '+966540802329', 'name' => 'Abdur Rahman (Dhomi)', 'location' => 'Makkah'],
     ];
+    $contacts = $fallbackContacts;
+    $stored = $banner->contact_info;
+    if (is_array($stored) && count($stored) >= 2) {
+    $parsed = array_map(function ($row) {
+    if (is_array($row) && array_key_exists('number', $row) && array_key_exists('name', $row)) {
+    return [
+    'number' => (string) $row['number'],
+    'name' => (string) $row['name'],
+    'location' => isset($row['location']) ? (string) $row['location'] : '',
+    ];
+    }
+    if (is_array($row) && isset($row[0], $row[1])) {
+    return [
+    'number' => (string) $row[0],
+    'name' => (string) $row[1],
+    'location' => isset($row[2]) ? (string) $row[2] : '',
+    ];
+    }
+
+    return ['number' => '', 'name' => '', 'location' => ''];
+    }, $stored);
+    $parsed = array_values(array_filter($parsed, fn ($c) => $c['number'] !== '' && $c['name'] !== ''));
+    if (count($parsed) >= 2) {
+    $contacts = $parsed;
+    }
+    }
+    foreach (array_keys($contacts) as $i) {
+    if (($contacts[$i]['location'] ?? '') !== '') {
+    continue;
+    }
+    $contacts[$i]['location'] = $fallbackContacts[$i]['location'] ?? 'Indonesia';
+    }
     @endphp
     <div class="banner">
         <div class="watermark" aria-hidden="true"></div>
@@ -260,16 +313,11 @@
                 <img src="{{ $imageUris['stack_3'] }}" alt="stack3">
 
             </div>
-            <div class="side-footer">
-                <div class="ar">مجموعة أمجاد المنورة للفنادق</div>
-                <div class="en-mid">Women's Gate Northern Region</div>
-                <div class="nusuk">Nusuk number : 749378 : رقم نسك</div>
-            </div>
         </div>
         <div class="content">
             <div class="brand-block">
-                <div class="ar-brand">فنادق أمجاد المنورة</div>
-                <div class="en-brand">AMJAD AL MONAWARA HOTELS</div>
+                <div class="ar-brand">فندق جيور روضة</div>
+                <div class="en-brand">Jiwer Rawda For Hotels</div>
             </div>
             <div class="stars">
                 <img src="{{asset('public/promotion-assets/icons/star.png')}}" alt="">
@@ -282,34 +330,38 @@
             <!-- last availability last-availability -->
 
             <div class="avilability">
-                <img src="{{asset('public/promotion-assets/last-availability.png')}}" alt="">
+                <img src="{{asset('public/promotion-assets/availability.png')}}" alt="Last availability">
             </div>
 
-
+            <div class="rate">
+                <div class="room-rate">Room Rate: {{ $banner->room_rate ?? 00 }} SAR</div>
+                <div class="fb">F.B: {{ $banner->fb ?? 00 }} SAR</div>
+            </div>
 
             <div class="from-to">
                 <div class="from">From <span class="date">{{$banner->from_date->format('d')}}</span> {{$banner->from_date->format('F')}}</div>
                 <div class="to">To <span class="date">{{$banner->to_date->format('d')}}</span> {{$banner->to_date->format('F')}}</div>
             </div>
+        </div>
 
-            <div class="footer">
-                <p>For booking &amp; inquiries please contact us using the following:</p>
-                <div class="footer-cols">
-                    @foreach ($contacts as $c)
-                    <div class="footer-col">
-                        <div class="footer-line1">
-                            @if (! empty($footerIcons['phone']))
-                            <img src="{{ $footerIcons['phone'] }}" alt="" width="18" height="18">
-                            @endif
-                            @if (! empty($footerIcons['whatsapp']))
-                            <img src="{{ $footerIcons['whatsapp'] }}" alt="" width="18" height="18">
-                            @endif
-                            <span>{{ $c[0] }}</span>
-                        </div>
-                        <div class="footer-name">{{ $c[1] }}</div>
+        <div class="footer">
+            <p>For booking &amp; inquiries please contact us using the following:</p>
+            <div class="footer-cols">
+                @foreach ($contacts as $c)
+                <div class="footer-col">
+                    <div class="footer-line1">
+                        @if (! empty($footerIcons['phone']))
+                        <img src="{{ $footerIcons['phone'] }}" alt="" width="18" height="18">
+                        @endif
+                        @if (! empty($footerIcons['whatsapp']))
+                        <img src="{{ $footerIcons['whatsapp'] }}" alt="" width="18" height="18">
+                        @endif
+                        <span>{{ $c['number'] }}</span>
                     </div>
-                    @endforeach
+                    <div class="footer-name">{{ $c['name'] }}</div>
+                    <div class="footer-loc">{{ $c['location'] }}</div>
                 </div>
+                @endforeach
             </div>
         </div>
     </div>

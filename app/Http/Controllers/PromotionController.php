@@ -21,7 +21,9 @@ class PromotionController extends Controller
 
     public function create()
     {
-        return view('promotions.create');
+        return view('promotions.create', [
+            'defaultContacts' => $this->defaultFooterContacts(),
+        ]);
     }
 
     public function store(Request $request)
@@ -40,18 +42,42 @@ class PromotionController extends Controller
             'offers.*.triple_rate' => ['required', 'integer', 'min:1'],
             'offers.*.quad_rate' => ['required', 'integer', 'min:1'],
             'offers.*.meals' => ['nullable', 'string', 'max:20'],
+            'contacts' => ['required', 'array'],
+            'contacts.0.number' => ['required', 'string', 'max:80'],
+            'contacts.0.name' => ['required', 'string', 'max:120'],
+            'contacts.0.location' => ['required', 'string', 'max:120'],
+            'contacts.1.number' => ['required', 'string', 'max:80'],
+            'contacts.1.name' => ['required', 'string', 'max:120'],
+            'contacts.1.location' => ['required', 'string', 'max:120'],
+            'contacts.2.number' => ['nullable', 'string', 'max:80', 'required_with:contacts.2.name'],
+            'contacts.2.name' => ['nullable', 'string', 'max:120', 'required_with:contacts.2.number'],
+            'contacts.2.location' => ['nullable', 'string', 'max:120'],
         ]);
 
-        // foreach ($validated['offers'] as $offer) {
-        //     if (Carbon::parse($offer['to_date'])->lt(Carbon::parse($offer['from_date']))) {
-        //         return redirect()
-        //             ->back()
-        //             ->withInput()
-        //             ->withErrors(['The "To" date must be greater than or equal to the "From" date.']);
-        //     }
-        // }
+        $contactInfo = [
+            [
+                'number' => trim($validated['contacts'][0]['number']),
+                'name' => trim($validated['contacts'][0]['name']),
+                'location' => trim($validated['contacts'][0]['location']),
+            ],
+            [
+                'number' => trim($validated['contacts'][1]['number']),
+                'name' => trim($validated['contacts'][1]['name']),
+                'location' => trim($validated['contacts'][1]['location']),
+            ],
+        ];
+        $thirdNumber = isset($validated['contacts'][2]['number']) ? trim((string) $validated['contacts'][2]['number']) : '';
+        $thirdName = isset($validated['contacts'][2]['name']) ? trim((string) $validated['contacts'][2]['name']) : '';
+        if ($thirdNumber !== '' && $thirdName !== '') {
+            $thirdLoc = isset($validated['contacts'][2]['location']) ? trim((string) $validated['contacts'][2]['location']) : '';
+            $contactInfo[] = [
+                'number' => $thirdNumber,
+                'name' => $thirdName,
+                'location' => $thirdLoc !== '' ? $thirdLoc : 'Indonesia',
+            ];
+        }
 
-        $promotion = DB::transaction(function () use ($request, $validated) {
+        $promotion = DB::transaction(function () use ($request, $validated, $contactInfo) {
             $heroPath = $request->file('hero_banner') ? $request->file('hero_banner')->store('promotion-assets', 'public') : null;
             $logoPath = $request->file('logo') ? $request->file('logo')->store('promotion-assets', 'public') : null;
             $roomImage1Path = $request->file('room_image_1') ? $request->file('room_image_1')->store('promotion-assets', 'public') : null;
@@ -66,6 +92,7 @@ class PromotionController extends Controller
                 'room_image_2_path' => $roomImage2Path,
                 'room_image_3_path' => $roomImage3Path,
                 'room_image_4_path' => $roomImage4Path,
+                'contact_info' => $contactInfo,
             ]);
 
             foreach ($validated['offers'] as $index => $offer) {
@@ -284,5 +311,29 @@ class PromotionController extends Controller
         $mime = @mime_content_type($absolutePath) ?: 'image/png';
 
         return 'data:'.$mime.';base64,'.base64_encode($contents);
+    }
+
+    /**
+     * @return list<array{number: string, name: string, location: string}>
+     */
+    private function defaultFooterContacts(): array
+    {
+        return [
+            [
+                'number' => '+966597709206',
+                'name' => 'Sahadath Khan',
+                'location' => 'Madinah',
+            ],
+            [
+                'number' => '+966540802329',
+                'name' => 'Abdur Rahman (Dhomi)',
+                'location' => 'Makkah',
+            ],
+            [
+                'number' => '',
+                'name' => '',
+                'location' => 'Indonesia',
+            ],
+        ];
     }
 }

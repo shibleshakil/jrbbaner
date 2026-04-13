@@ -346,11 +346,42 @@
     'Triple and quad occupancy will be through extra bed if standard room is not available.',
     'Rates are subject to change without prior notice.',
     ];
-    $contacts = [
-    ['+966597709206', 'Sahadath Khan', 'Madinah'],
-    ['+966540802329', 'Abdur Rahman (Dhomi)', 'Makkah'],
-    ['+966597709206', 'Sahadath Khan', 'Indonesia Office'],
+    $fallbackContacts = [
+        ['number' => '+966597709206', 'name' => 'Sahadath Khan', 'location' => 'Madinah'],
+        ['number' => '+966540802329', 'name' => 'Abdur Rahman (Dhomi)', 'location' => 'Makkah'],
     ];
+    $contacts = $fallbackContacts;
+    $stored = $promotion->contact_info;
+    if (is_array($stored) && count($stored) >= 2) {
+        $parsed = array_map(function ($row) {
+            if (is_array($row) && array_key_exists('number', $row) && array_key_exists('name', $row)) {
+                return [
+                    'number' => (string) $row['number'],
+                    'name' => (string) $row['name'],
+                    'location' => isset($row['location']) ? (string) $row['location'] : '',
+                ];
+            }
+            if (is_array($row) && isset($row[0], $row[1])) {
+                return [
+                    'number' => (string) $row[0],
+                    'name' => (string) $row[1],
+                    'location' => isset($row[2]) ? (string) $row[2] : '',
+                ];
+            }
+
+            return ['number' => '', 'name' => '', 'location' => ''];
+        }, $stored);
+        $parsed = array_values(array_filter($parsed, fn ($c) => $c['number'] !== '' && $c['name'] !== ''));
+        if (count($parsed) >= 2) {
+            $contacts = $parsed;
+        }
+    }
+    foreach (array_keys($contacts) as $i) {
+        if (($contacts[$i]['location'] ?? '') !== '') {
+            continue;
+        }
+        $contacts[$i]['location'] = $fallbackContacts[$i]['location'] ?? 'Indonesia';
+    }
     @endphp
     <div class="banner">
         <img class="hero" src="{{ $bannerAssets['hero'] }}" alt="" width="1130" height="560">
@@ -452,10 +483,10 @@
                         @if (! empty($footerIcons['whatsapp']))
                         <img src="{{ $footerIcons['whatsapp'] }}" alt="" width="18" height="18">
                         @endif
-                        <span>{{ $c[0] }}</span>
+                        <span>{{ $c['number'] }}</span>
                     </div>
-                    <div class="footer-name">{{ $c[1] }}</div>
-                    <div class="footer-loc">{{ $c[2] }}</div>
+                    <div class="footer-name">{{ $c['name'] }}</div>
+                    <div class="footer-loc">{{ $c['location'] }}</div>
                 </div>
                 @endforeach
             </div>

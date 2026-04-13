@@ -115,7 +115,6 @@
     <!-- END: Theme JS-->
     <script type="text/javascript">
         $(function() {
-
             $(".select2").select2();
             $('.datetime').datetimepicker({
                 // format: 'DD-MM-YYYY HH:mm',
@@ -129,6 +128,16 @@
             submitBtn.attr('disabled', 'disabled');
             submitBtn.append(' <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>');
         })
+
+        $(document).on('focus', 'input[type=number]', function() {
+            $(this).on('wheel.disableScroll', function(e) {
+                e.preventDefault();
+            });
+        });
+
+        $(document).on('blur', 'input[type=number]', function() {
+            $(this).off('wheel.disableScroll');
+        });
     </script>
 
 

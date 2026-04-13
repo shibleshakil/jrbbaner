@@ -82,6 +82,39 @@
                                         <button class="btn btn-outline-primary" type="button" id="addRowBtn">Add Row</button>
                                     </div>
 
+                                    <div class="row">
+                                        <div class="col-12">
+                                    <hr class="mt-3">
+                                    <h5>Footer contacts</h5>
+                                    <p class="text-muted small">First two contacts are required (defaults are pre-filled). A third contact is optional and appears on the banner only when both phone and name are filled.</p>
+                                    @foreach ([0 => 'Contact 1', 1 => 'Contact 2', 2 => 'Contact 3 (optional)'] as $idx => $label)
+                                    <div class="form-group border rounded p-2 mb-2 px-3">
+                                        <label class="font-weight-bold d-block">{{ $label }}</label>
+                                        <div class="row">
+                                            <div class="col-md-4 mb-2">
+                                                <label for="promo_contact_{{ $idx }}_number" class="small">Phone / WhatsApp @if ($idx < 2)<span class="text-danger">*</span>@endif</label>
+                                                <input type="text" name="contacts[{{ $idx }}][number]" id="promo_contact_{{ $idx }}_number" class="form-control"
+                                                    value="{{ old('contacts.'.$idx.'.number', $defaultContacts[$idx]['number'] ?? '') }}"
+                                                    @if ($idx < 2) required @endif>
+                                            </div>
+                                            <div class="col-md-4 mb-2">
+                                                <label for="promo_contact_{{ $idx }}_name" class="small">Name @if ($idx < 2)<span class="text-danger">*</span>@endif</label>
+                                                <input type="text" name="contacts[{{ $idx }}][name]" id="promo_contact_{{ $idx }}_name" class="form-control"
+                                                    value="{{ old('contacts.'.$idx.'.name', $defaultContacts[$idx]['name'] ?? '') }}"
+                                                    @if ($idx < 2) required @endif>
+                                            </div>
+                                            <div class="col-md-4 mb-2">
+                                                <label for="promo_contact_{{ $idx }}_location" class="small">Location @if ($idx < 2)<span class="text-danger">*</span>@endif</label>
+                                                <input type="text" name="contacts[{{ $idx }}][location]" id="promo_contact_{{ $idx }}_location" class="form-control"
+                                                    value="{{ old('contacts.'.$idx.'.location', $defaultContacts[$idx]['location'] ?? '') }}"
+                                                    @if ($idx < 2) required @endif>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endforeach
+                                        </div>
+                                    </div>
+
                                     <div class="mt-3">
                                         <button type="submit" class="btn btn-primary">Generate Banner</button>
                                     </div>

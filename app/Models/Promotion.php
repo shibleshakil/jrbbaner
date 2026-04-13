@@ -18,6 +18,11 @@ class Promotion extends Model
         'room_image_3_path',
         'room_image_4_path',
         'generated_banner_path',
+        'contact_info',
+    ];
+
+    protected $casts = [
+        'contact_info' => 'array',
     ];
 
     public function offerDetails(): HasMany

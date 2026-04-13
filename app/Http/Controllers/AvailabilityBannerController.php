@@ -21,7 +21,9 @@ class AvailabilityBannerController extends Controller
 
     public function create()
     {
-        return view('availability_banners.create');
+        return view('availability_banners.create', [
+            'defaultContacts' => $this->defaultFooterContacts(),
+        ]);
     }
 
     public function store(Request $request)
@@ -29,11 +31,46 @@ class AvailabilityBannerController extends Controller
         $validated = $request->validate([
             'from_date' => ['required', 'date'],
             'to_date' => ['required', 'date'],
-            'hotel_name' => ['nullable', 'string', 'max:120'],
+            'hotel_name' => ['required', 'string', 'max:120'],
+            'room_rate' => ['required', 'string', 'max:120'],
+            'fb' => ['required', 'string', 'max:120'],
             'image_1' => ['nullable', 'image'],
             'image_2' => ['nullable', 'image'],
             'image_3' => ['nullable', 'image'],
+            'contacts' => ['required', 'array'],
+            'contacts.0.number' => ['required', 'string', 'max:80'],
+            'contacts.0.name' => ['required', 'string', 'max:120'],
+            'contacts.0.location' => ['required', 'string', 'max:120'],
+            'contacts.1.number' => ['required', 'string', 'max:80'],
+            'contacts.1.name' => ['required', 'string', 'max:120'],
+            'contacts.1.location' => ['required', 'string', 'max:120'],
+            'contacts.2.number' => ['nullable', 'string', 'max:80', 'required_with:contacts.2.name'],
+            'contacts.2.name' => ['nullable', 'string', 'max:120', 'required_with:contacts.2.number'],
+            'contacts.2.location' => ['nullable', 'string', 'max:120'],
         ]);
+
+        $contactInfo = [
+            [
+                'number' => trim($validated['contacts'][0]['number']),
+                'name' => trim($validated['contacts'][0]['name']),
+                'location' => trim($validated['contacts'][0]['location']),
+            ],
+            [
+                'number' => trim($validated['contacts'][1]['number']),
+                'name' => trim($validated['contacts'][1]['name']),
+                'location' => trim($validated['contacts'][1]['location']),
+            ],
+        ];
+        $thirdNumber = isset($validated['contacts'][2]['number']) ? trim((string) $validated['contacts'][2]['number']) : '';
+        $thirdName = isset($validated['contacts'][2]['name']) ? trim((string) $validated['contacts'][2]['name']) : '';
+        if ($thirdNumber !== '' && $thirdName !== '') {
+            $thirdLoc = isset($validated['contacts'][2]['location']) ? trim((string) $validated['contacts'][2]['location']) : '';
+            $contactInfo[] = [
+                'number' => $thirdNumber,
+                'name' => $thirdName,
+                'location' => $thirdLoc !== '' ? $thirdLoc : 'Indonesia',
+            ];
+        }
 
         if (Carbon::parse($validated['to_date'])->lt(Carbon::parse($validated['from_date']))) {
             return redirect()
@@ -42,7 +79,7 @@ class AvailabilityBannerController extends Controller
                 ->withErrors(['to_date' => 'The end date must be on or after the start date.']);
         }
 
-        $banner = DB::transaction(function () use ($request, $validated) {
+        $banner = DB::transaction(function () use ($request, $validated, $contactInfo) {
             $image1Path = $request->file('image_1') ? $request->file('image_1')->store('secondary-banner-assets', 'public') : null;
             $image2Path = $request->file('image_2') ? $request->file('image_2')->store('secondary-banner-assets', 'public') : null;
             $image3Path = $request->file('image_3') ? $request->file('image_3')->store('secondary-banner-assets', 'public') : null;
@@ -54,6 +91,7 @@ class AvailabilityBannerController extends Controller
                 'image_1_path' => $image1Path,
                 'image_2_path' => $image2Path,
                 'image_3_path' => $image3Path,
+                'contact_info' => $contactInfo,
             ]);
         });
 
@@ -92,16 +130,10 @@ class AvailabilityBannerController extends Controller
             }
         }
 
-        // dd($imageUris, $footerIcons);
-
         return view('availability_banners.banner_export', [
             'banner' => $availabilityBanner,
             'imageUris' => $imageUris,
             'footerIcons' => $footerIcons,
-        ]);
-
-        return view('availability_banners.banner', [
-            'banner' => $availabilityBanner,
         ]);
     }
 
@@ -237,5 +269,29 @@ class AvailabilityBannerController extends Controller
         $mime = @mime_content_type($absolutePath) ?: 'image/png';
 
         return 'data:' . $mime . ';base64,' . base64_encode($contents);
+    }
+
+    /**
+     * @return list<array{number: string, name: string, location: string}>
+     */
+    private function defaultFooterContacts(): array
+    {
+        return [
+            [
+                'number' => '+966597709206',
+                'name' => 'Sahadath Khan',
+                'location' => 'Madinah',
+            ],
+            [
+                'number' => '+966540802329',
+                'name' => 'Abdur Rahman (Dhomi)',
+                'location' => 'Makkah',
+            ],
+            [
+                'number' => '',
+                'name' => '',
+                'location' => 'Indonesia',
+            ],
+        ];
     }
 }
