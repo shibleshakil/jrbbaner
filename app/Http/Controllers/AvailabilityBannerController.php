@@ -88,6 +88,8 @@ class AvailabilityBannerController extends Controller
                 'from_date' => $validated['from_date'],
                 'to_date' => $validated['to_date'],
                 'hotel_name' => $validated['hotel_name'] ?? 'Jiwer Rawda Hotel',
+                'room_rate' => $validated['room_rate'] ?? '0.00',
+                'fb' => $validated['fb'] ?? '0.00',
                 'image_1_path' => $image1Path,
                 'image_2_path' => $image2Path,
                 'image_3_path' => $image3Path,
