@@ -118,7 +118,7 @@ class AvailabilityBannerController extends Controller
 
     public function show(AvailabilityBanner $availabilityBanner)
     {
-        $imageUris = $this->bannerImageDataUris();
+        $imageUris = $this->bannerImageDataUris($availabilityBanner);
         foreach ($imageUris as $uri) {
             if ($uri === null) {
                 throw new \RuntimeException('Could not read promotion-assets image files for PNG export.');
@@ -187,7 +187,7 @@ class AvailabilityBannerController extends Controller
      */
     private function saveBannerPng(AvailabilityBanner $banner): string
     {
-        $imageUris = $this->bannerImageDataUris();
+        $imageUris = $this->bannerImageDataUris($banner);
         foreach ($imageUris as $uri) {
             if ($uri === null) {
                 throw new \RuntimeException('Could not read promotion-assets image files for PNG export.');
@@ -248,13 +248,13 @@ class AvailabilityBannerController extends Controller
     /**
      * @return array{sidebar_logo: ?string, stack_1: ?string, stack_2: ?string, stack_3: ?string}
      */
-    private function bannerImageDataUris(): array
+    private function bannerImageDataUris($banner): array
     {
         return [
             'sidebar_logo' => $this->imageDataUri(public_path('app-assets/images/logo/logo.png')),
-            'stack_1' => $this->imageDataUri(public_path('promotion-assets/hotel-1.webp')),
-            'stack_2' => $this->imageDataUri(public_path('promotion-assets/room-2.jpg')),
-            'stack_3' => $this->imageDataUri(public_path('promotion-assets/room-3.jpg')),
+            'stack_1' => $this->imageDataUri($banner->image_1_path ? storage_path('app/public/'.$banner->image_1_path) : public_path('promotion-assets/hotel-1.webp')),
+            'stack_2' => $this->imageDataUri($banner->image_2_path ? storage_path('app/public/'.$banner->image_2_path) : public_path('promotion-assets/room-2.jpg')),
+            'stack_3' => $this->imageDataUri($banner->image_3_path ? storage_path('app/public/'.$banner->image_3_path) : public_path('promotion-assets/room-3.jpg')),
         ];
     }
 
