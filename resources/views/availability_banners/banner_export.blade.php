@@ -7,6 +7,17 @@
     <title>Availability banner</title>
     <link href="https://fonts.googleapis.com/css2?family=Paprika&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --arabic-font: 'ArbFONTS-ae-almohanad';
+        }
+
+        @font-face {
+            font-family: 'ArbFONTS-ae-almohanad';
+            src: url("{{ $arabicFontUri ?? '' }}") format('truetype'),
+                 url("{{ asset('fonts/ArbFONTS-ae-almohanad.ttf') }}") format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
         * {
             box-sizing: border-box;
         }
@@ -104,6 +115,7 @@
 
         .ar {
             direction: rtl;
+            font-family: var(--arabic-font), serif;
         }
 
         .content {
@@ -122,6 +134,7 @@
             font-size: 32px;
             font-weight: 700;
             margin-bottom: 2px;
+            font-family: var(--arabic-font), serif;
         }
 
         .brand-block .en-brand {
@@ -157,23 +170,25 @@
         }
 
         .rate {
-            margin:10px 0 30px;
+            margin: 10px 0 30px;
         }
 
         .room-rate {
             text-align: center;
-            font-size: 42px;
+            font-size: 58px;
             font-weight: 800;
             color: #0a3d6e;
             position: relative;
+            margin: 0;
         }
 
         .fb {
             text-align: center;
-            font-size: 42px;
+            font-size: 58px;
             font-weight: 800;
             color: #0a3d6e;
             position: relative;
+            margin: 0;
         }
 
         .from-to {
@@ -334,8 +349,8 @@
             </div>
 
             <div class="rate">
-                <div class="room-rate">Room Rate: {{ $banner->room_rate ?? 00 }} SAR</div>
-                <div class="fb">F.B: {{ $banner->fb ?? 00 }} SAR</div>
+                <p class="room-rate">Room Rate: {{ $banner->room_rate ?? 00 }} SAR</p>
+                <p class="fb">F.B: {{ $banner->fb ?? 00 }} SAR</p>
             </div>
 
             <div class="from-to">

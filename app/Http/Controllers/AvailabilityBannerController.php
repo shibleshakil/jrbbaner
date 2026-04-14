@@ -132,10 +132,16 @@ class AvailabilityBannerController extends Controller
             }
         }
 
+        $arabicFontUri = $this->fontDataUri(public_path('fonts/ArbFONTS-ae-almohanad.ttf'));
+        if ($arabicFontUri === null) {
+            throw new \RuntimeException('Could not read Arabic font file for preview.');
+        }
+
         return view('availability_banners.banner_export', [
             'banner' => $availabilityBanner,
             'imageUris' => $imageUris,
             'footerIcons' => $footerIcons,
+            'arabicFontUri' => $arabicFontUri,
         ]);
     }
 
@@ -195,10 +201,16 @@ class AvailabilityBannerController extends Controller
             }
         }
 
+        $arabicFontUri = $this->fontDataUri(public_path('fonts/ArbFONTS-ae-almohanad.ttf'));
+        if ($arabicFontUri === null) {
+            throw new \RuntimeException('Could not read Arabic font file for PNG export.');
+        }
+
         $html = view('availability_banners.banner_export', [
             'banner' => $banner,
             'imageUris' => $imageUris,
             'footerIcons' => $footerIcons,
+            'arabicFontUri' => $arabicFontUri,
         ])->render();
 
         $relativePath = 'generated-banners/last-availability-' . $banner->id . '.png';
@@ -271,6 +283,20 @@ class AvailabilityBannerController extends Controller
         $mime = @mime_content_type($absolutePath) ?: 'image/png';
 
         return 'data:' . $mime . ';base64,' . base64_encode($contents);
+    }
+
+    private function fontDataUri(string $absolutePath): ?string
+    {
+        if (! is_file($absolutePath)) {
+            return null;
+        }
+
+        $contents = @file_get_contents($absolutePath);
+        if ($contents === false) {
+            return null;
+        }
+
+        return 'data:font/ttf;base64,' . base64_encode($contents);
     }
 
     /**
