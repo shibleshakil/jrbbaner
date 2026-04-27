@@ -13,6 +13,8 @@ class Promotion extends Model
     protected $fillable = [
         'hero_banner_path',
         'logo_path',
+        'hotel_name',
+        'hotel_year',
         'room_image_1_path',
         'room_image_2_path',
         'room_image_3_path',

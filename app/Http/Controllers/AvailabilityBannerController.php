@@ -14,7 +14,7 @@ class AvailabilityBannerController extends Controller
 {
     public function index()
     {
-        $banners = AvailabilityBanner::latest()->get();
+        $banners = AvailabilityBanner::latest()->paginate(10);
 
         return view('availability_banners.index', compact('banners'));
     }

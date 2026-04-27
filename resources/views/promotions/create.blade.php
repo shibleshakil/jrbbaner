@@ -54,22 +54,31 @@
                                             <label>Brand Logo (Optional)</label>
                                             <input type="file" name="logo" class="form-control" accept="image/*">
                                         </div>
+                                        <div class="col-md-6 mb-2">
+                                            <label>Hotel Name</label>
+                                            <input type="text" name="hotel_name" class="form-control" value="{{ old('hotel_name') }}">
+                                        </div>
+                                        <div class="col-md-6 mb-2">
+                                            <label>Hotel Year</label>
+                                            <input type="text" name="hotel_year" class="form-control" value="{{ old('hotel_year') }}">
+                                        </div>
                                     </div>
+
                                     <div class="row">
                                         <div class="col-md-3 mb-2">
-                                            <label>Room Image 1 <span class="text-danger">*</span> <small>(240X160)</small></label>
+                                            <label>Room Image 1<small>(240X160)</small></label>
                                             <input type="file" name="room_image_1" class="form-control" accept="image/*" >
                                         </div>
                                         <div class="col-md-3 mb-2">
-                                            <label>Room Image 2 <span class="text-danger">*</span> <small>(240X160)</small></label>
+                                            <label>Room Image 2<small>(240X160)</small></label>
                                             <input type="file" name="room_image_2" class="form-control" accept="image/*" >
                                         </div>
                                         <div class="col-md-3 mb-2">
-                                            <label>Room Image 3 <span class="text-danger">*</span> <small>(240X160)</small></label>
+                                            <label>Room Image 3<small>(240X160)</small></label>
                                             <input type="file" name="room_image_3" class="form-control" accept="image/*" >
                                         </div>
                                         <div class="col-md-3 mb-2">
-                                            <label>Room Image 4 <span class="text-danger">*</span> <small>(240X160)</small></label>
+                                            <label>Room Image 4<small>(240X160)</small></label>
                                             <input type="file" name="room_image_4" class="form-control" accept="image/*" >
                                         </div>
                                     </div>
@@ -142,23 +151,23 @@
                 <div class="border p-2 mb-2 offer-row">
                     <div class="row">
                         <div class="col-md-2 mb-1">
-                            <label>From</label>
+                            <label>From<span class="text-danger">*</span></label>
                             <input type="date" name="offers[${index}][from_date]" class="form-control" required>
                         </div>
                         <div class="col-md-2 mb-1">
-                            <label>To</label>
+                            <label>To<span class="text-danger">*</span></label>
                             <input type="date" name="offers[${index}][to_date]" class="form-control" required>
                         </div>
                         <div class="col-md-2 mb-1">
-                            <label>Double (Price)</label>
+                            <label>Double (Price)<span class="text-danger">*</span></label>
                             <input type="number" min="1" name="offers[${index}][double_rate]" class="form-control" required>
                         </div>
                         <div class="col-md-2 mb-1">
-                            <label>Triple (Price)</label>
+                            <label>Triple (Price)<span class="text-danger">*</span></label>
                             <input type="number" min="1" name="offers[${index}][triple_rate]" class="form-control" required>
                         </div>
                         <div class="col-md-2 mb-1">
-                            <label>Quad (Price)</label>
+                            <label>Quad (Price)<span class="text-danger">*</span></label>
                             <input type="number" min="1" name="offers[${index}][quad_rate]" class="form-control" required>
                         </div>
                         <div class="col-md-2 mb-1">

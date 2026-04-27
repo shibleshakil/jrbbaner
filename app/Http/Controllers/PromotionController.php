@@ -14,7 +14,8 @@ class PromotionController extends Controller
 {
     public function index()
     {
-        $promotions = Promotion::with('offerDetails')->latest()->get();
+        // TODO: Pagination
+        $promotions = Promotion::with('offerDetails')->latest()->paginate(10);
 
         return view('promotions.index', compact('promotions'));
     }
@@ -31,6 +32,8 @@ class PromotionController extends Controller
         $validated = $request->validate([
             'hero_banner' => ['nullable', 'image'],
             'logo' => ['nullable', 'image'],
+            'hotel_name' => ['required', 'string', 'max:120'],
+            'hotel_year' => ['required', 'string', 'max:60'],
             'room_image_1' => ['nullable', 'image'],
             'room_image_2' => ['nullable', 'image'],
             'room_image_3' => ['nullable', 'image'],
@@ -88,6 +91,8 @@ class PromotionController extends Controller
             $promotion = Promotion::create([
                 'hero_banner_path' => $heroPath,
                 'logo_path' => $logoPath,
+                'hotel_name' => $validated['hotel_name'],
+                'hotel_year' => $validated['hotel_year'],
                 'room_image_1_path' => $roomImage1Path,
                 'room_image_2_path' => $roomImage2Path,
                 'room_image_3_path' => $roomImage3Path,

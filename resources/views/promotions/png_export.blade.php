@@ -347,40 +347,40 @@
     'Rates are subject to change without prior notice.',
     ];
     $fallbackContacts = [
-        ['number' => '+966597709206', 'name' => 'Sahadath Khan', 'location' => 'Madinah'],
-        ['number' => '+966540802329', 'name' => 'Abdur Rahman (Dhomi)', 'location' => 'Makkah'],
+    ['number' => '+966597709206', 'name' => 'Sahadath Khan', 'location' => 'Madinah'],
+    ['number' => '+966540802329', 'name' => 'Abdur Rahman (Dhomi)', 'location' => 'Makkah'],
     ];
     $contacts = $fallbackContacts;
     $stored = $promotion->contact_info;
     if (is_array($stored) && count($stored) >= 2) {
-        $parsed = array_map(function ($row) {
-            if (is_array($row) && array_key_exists('number', $row) && array_key_exists('name', $row)) {
-                return [
-                    'number' => (string) $row['number'],
-                    'name' => (string) $row['name'],
-                    'location' => isset($row['location']) ? (string) $row['location'] : '',
-                ];
-            }
-            if (is_array($row) && isset($row[0], $row[1])) {
-                return [
-                    'number' => (string) $row[0],
-                    'name' => (string) $row[1],
-                    'location' => isset($row[2]) ? (string) $row[2] : '',
-                ];
-            }
+    $parsed = array_map(function ($row) {
+    if (is_array($row) && array_key_exists('number', $row) && array_key_exists('name', $row)) {
+    return [
+    'number' => (string) $row['number'],
+    'name' => (string) $row['name'],
+    'location' => isset($row['location']) ? (string) $row['location'] : '',
+    ];
+    }
+    if (is_array($row) && isset($row[0], $row[1])) {
+    return [
+    'number' => (string) $row[0],
+    'name' => (string) $row[1],
+    'location' => isset($row[2]) ? (string) $row[2] : '',
+    ];
+    }
 
-            return ['number' => '', 'name' => '', 'location' => ''];
-        }, $stored);
-        $parsed = array_values(array_filter($parsed, fn ($c) => $c['number'] !== '' && $c['name'] !== ''));
-        if (count($parsed) >= 2) {
-            $contacts = $parsed;
-        }
+    return ['number' => '', 'name' => '', 'location' => ''];
+    }, $stored);
+    $parsed = array_values(array_filter($parsed, fn ($c) => $c['number'] !== '' && $c['name'] !== ''));
+    if (count($parsed) >= 2) {
+    $contacts = $parsed;
+    }
     }
     foreach (array_keys($contacts) as $i) {
-        if (($contacts[$i]['location'] ?? '') !== '') {
-            continue;
-        }
-        $contacts[$i]['location'] = $fallbackContacts[$i]['location'] ?? 'Indonesia';
+    if (($contacts[$i]['location'] ?? '') !== '') {
+    continue;
+    }
+    $contacts[$i]['location'] = $fallbackContacts[$i]['location'] ?? 'Indonesia';
     }
     @endphp
     <div class="banner">
@@ -408,13 +408,13 @@
                         </div>
                         <div class="badge-text">
                             <span class="l1">( Fareast Rate )</span>
-                            <span class="l2">Jiwer Rawda For Hotel</span>
+                            <span class="l2">{{$promotion->hotel_name ?? 'Jiwer Rawda For Hotel'}}</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="badge-year">
-                <span>1448</span>
+                <span>{{$promotion->hotel_year ?? '1448'}}</span>
             </div>
         </div>
 

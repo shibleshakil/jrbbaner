@@ -14,7 +14,7 @@
                     <span class="menu-title">Promotions</span>
                 </a>
                 <ul class="menu-content">
-                    <li class="{{ Request::routeIs('promotions.*') ? 'active' : '' }}">
+                    <li class="{{ Request::routeIs('promotions.index') ? 'active' : '' }}">
                         <a href="{{ route('promotions.index') }}">
                             <i class="feather icon-circle"></i>
                             <span class="menu-item">Promotions</span>
