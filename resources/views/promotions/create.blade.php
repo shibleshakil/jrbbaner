@@ -55,8 +55,8 @@
                                             <input type="file" name="logo" class="form-control" accept="image/*">
                                         </div>
                                         <div class="col-md-6 mb-2">
-                                            <label>Hotel Name</label>
-                                            <input type="text" name="hotel_name" class="form-control" value="{{ old('hotel_name') }}">
+                                            <label>Hotel Name<span class="text-danger">*</span></label>
+                                            <input type="text" name="hotel_name" class="form-control" value="{{ old('hotel_name') }}" required>
                                         </div>
                                         <div class="col-md-6 mb-2">
                                             <label>Hotel Year</label>
@@ -67,19 +67,19 @@
                                     <div class="row">
                                         <div class="col-md-3 mb-2">
                                             <label>Room Image 1<small>(240X160)</small></label>
-                                            <input type="file" name="room_image_1" class="form-control" accept="image/*" >
+                                            <input type="file" name="room_image_1" class="form-control" accept="image/*">
                                         </div>
                                         <div class="col-md-3 mb-2">
                                             <label>Room Image 2<small>(240X160)</small></label>
-                                            <input type="file" name="room_image_2" class="form-control" accept="image/*" >
+                                            <input type="file" name="room_image_2" class="form-control" accept="image/*">
                                         </div>
                                         <div class="col-md-3 mb-2">
                                             <label>Room Image 3<small>(240X160)</small></label>
-                                            <input type="file" name="room_image_3" class="form-control" accept="image/*" >
+                                            <input type="file" name="room_image_3" class="form-control" accept="image/*">
                                         </div>
                                         <div class="col-md-3 mb-2">
                                             <label>Room Image 4<small>(240X160)</small></label>
-                                            <input type="file" name="room_image_4" class="form-control" accept="image/*" >
+                                            <input type="file" name="room_image_4" class="form-control" accept="image/*">
                                         </div>
                                     </div>
 
@@ -93,34 +93,34 @@
 
                                     <div class="row">
                                         <div class="col-12">
-                                    <hr class="mt-3">
-                                    <h5>Footer contacts</h5>
-                                    <p class="text-muted small">First two contacts are required (defaults are pre-filled). A third contact is optional and appears on the banner only when both phone and name are filled.</p>
-                                    @foreach ([0 => 'Contact 1', 1 => 'Contact 2', 2 => 'Contact 3 (optional)'] as $idx => $label)
-                                    <div class="form-group border rounded p-2 mb-2 px-3">
-                                        <label class="font-weight-bold d-block">{{ $label }}</label>
-                                        <div class="row">
-                                            <div class="col-md-4 mb-2">
-                                                <label for="promo_contact_{{ $idx }}_number" class="small">Phone / WhatsApp @if ($idx < 2)<span class="text-danger">*</span>@endif</label>
-                                                <input type="text" name="contacts[{{ $idx }}][number]" id="promo_contact_{{ $idx }}_number" class="form-control"
-                                                    value="{{ old('contacts.'.$idx.'.number', $defaultContacts[$idx]['number'] ?? '') }}"
-                                                    @if ($idx < 2) required @endif>
+                                            <hr class="mt-3">
+                                            <h5>Footer contacts</h5>
+                                            <p class="text-muted small">First two contacts are required (defaults are pre-filled). A third contact is optional and appears on the banner only when both phone and name are filled.</p>
+                                            @foreach ([0 => 'Contact 1', 1 => 'Contact 2', 2 => 'Contact 3 (optional)'] as $idx => $label)
+                                            <div class="form-group border rounded p-2 mb-2 px-3">
+                                                <label class="font-weight-bold d-block">{{ $label }}</label>
+                                                <div class="row">
+                                                    <div class="col-md-4 mb-2">
+                                                        <label for="promo_contact_{{ $idx }}_number" class="small">Phone / WhatsApp @if ($idx < 2)<span class="text-danger">*</span>@endif</label>
+                                                        <input type="text" name="contacts[{{ $idx }}][number]" id="promo_contact_{{ $idx }}_number" class="form-control"
+                                                            value="{{ old('contacts.'.$idx.'.number', $defaultContacts[$idx]['number'] ?? '') }}"
+                                                            @if ($idx < 2) required @endif>
+                                                    </div>
+                                                    <div class="col-md-4 mb-2">
+                                                        <label for="promo_contact_{{ $idx }}_name" class="small">Name @if ($idx < 2)<span class="text-danger">*</span>@endif</label>
+                                                        <input type="text" name="contacts[{{ $idx }}][name]" id="promo_contact_{{ $idx }}_name" class="form-control"
+                                                            value="{{ old('contacts.'.$idx.'.name', $defaultContacts[$idx]['name'] ?? '') }}"
+                                                            @if ($idx < 2) required @endif>
+                                                    </div>
+                                                    <div class="col-md-4 mb-2">
+                                                        <label for="promo_contact_{{ $idx }}_location" class="small">Location @if ($idx < 2)<span class="text-danger">*</span>@endif</label>
+                                                        <input type="text" name="contacts[{{ $idx }}][location]" id="promo_contact_{{ $idx }}_location" class="form-control"
+                                                            value="{{ old('contacts.'.$idx.'.location', $defaultContacts[$idx]['location'] ?? '') }}"
+                                                            @if ($idx < 2) required @endif>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-md-4 mb-2">
-                                                <label for="promo_contact_{{ $idx }}_name" class="small">Name @if ($idx < 2)<span class="text-danger">*</span>@endif</label>
-                                                <input type="text" name="contacts[{{ $idx }}][name]" id="promo_contact_{{ $idx }}_name" class="form-control"
-                                                    value="{{ old('contacts.'.$idx.'.name', $defaultContacts[$idx]['name'] ?? '') }}"
-                                                    @if ($idx < 2) required @endif>
-                                            </div>
-                                            <div class="col-md-4 mb-2">
-                                                <label for="promo_contact_{{ $idx }}_location" class="small">Location @if ($idx < 2)<span class="text-danger">*</span>@endif</label>
-                                                <input type="text" name="contacts[{{ $idx }}][location]" id="promo_contact_{{ $idx }}_location" class="form-control"
-                                                    value="{{ old('contacts.'.$idx.'.location', $defaultContacts[$idx]['location'] ?? '') }}"
-                                                    @if ($idx < 2) required @endif>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    @endforeach
+                                            @endforeach
                                         </div>
                                     </div>
 
@@ -172,7 +172,7 @@
                         </div>
                         <div class="col-md-2 mb-1">
                             <label>Meals</label>
-                            <input type="text" maxlength="20" name="offers[${index}][meals]" class="form-control" required>
+                            <input type="text" maxlength="20" name="offers[${index}][meals]" class="form-control">
                         </div>
                     </div>
                     <button type="button" class="btn btn-danger btn-sm remove-row">Remove</button>

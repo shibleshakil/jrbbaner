@@ -407,8 +407,8 @@
                             </svg>
                         </div>
                         <div class="badge-text">
-                            <span class="l1">( Fareast Rate )</span>
-                            <span class="l2">{{$promotion->hotel_name ?? 'Jiwer Rawda For Hotel'}}</span>
+                            <span class="l1">Jiwer Rawda For Hotel</span>
+                            <span class="l2">{{$promotion->hotel_name ?? ''}}</span>
                         </div>
                     </div>
                 </div>

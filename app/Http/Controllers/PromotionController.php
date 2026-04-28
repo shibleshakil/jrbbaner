@@ -33,7 +33,7 @@ class PromotionController extends Controller
             'hero_banner' => ['nullable', 'image'],
             'logo' => ['nullable', 'image'],
             'hotel_name' => ['required', 'string', 'max:120'],
-            'hotel_year' => ['required', 'string', 'max:60'],
+            'hotel_year' => ['nullable', 'string', 'max:60'],
             'room_image_1' => ['nullable', 'image'],
             'room_image_2' => ['nullable', 'image'],
             'room_image_3' => ['nullable', 'image'],
