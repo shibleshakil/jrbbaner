@@ -23,6 +23,7 @@ class AvailabilityBannerController extends Controller
     {
         return view('availability_banners.create', [
             'defaultContacts' => $this->defaultFooterContacts(),
+            'defaultFooter' => $this->defaultFooter(),
         ]);
     }
 
@@ -47,6 +48,8 @@ class AvailabilityBannerController extends Controller
             'contacts.2.number' => ['nullable', 'string', 'max:80', 'required_with:contacts.2.name'],
             'contacts.2.name' => ['nullable', 'string', 'max:120', 'required_with:contacts.2.number'],
             'contacts.2.location' => ['nullable', 'string', 'max:120'],
+            'contact_email' => ['nullable', 'string', 'max:50'],
+            'facebook_page' => ['nullable', 'string', 'max:120'],
         ]);
 
         $contactInfo = [
@@ -94,6 +97,8 @@ class AvailabilityBannerController extends Controller
                 'image_2_path' => $image2Path,
                 'image_3_path' => $image3Path,
                 'contact_info' => $contactInfo,
+                'contact_email' => $validated['contact_email'],
+                'facebook_page' => $validated['facebook_page'],
             ]);
         });
 
@@ -221,7 +226,7 @@ class AvailabilityBannerController extends Controller
         }
 
         $browsershot = Browsershot::html($html)
-            ->windowSize(1200, 1183)
+            ->windowSize(1200, 1213)
             ->timeout(120)
             ->waitUntilNetworkIdle();
 
@@ -259,13 +264,15 @@ class AvailabilityBannerController extends Controller
     }
 
     /**
-     * @return array{whatsapp: ?string, phone: ?string}
+     * @return array{whatsapp: ?string, phone: ?string, mail: ?string, facebook: ?string}
      */
     private function footerIconDataUris(): array
     {
         return [
             'whatsapp' => $this->imageDataUri(public_path('promotion-assets/icons/whatsapp.png')),
             'phone' => $this->imageDataUri(public_path('promotion-assets/icons/phone.png')),
+            'mail' => $this->imageDataUri(public_path('promotion-assets/icons/mail.png')),
+            'facebook' => $this->imageDataUri(public_path('promotion-assets/icons/facebook_dark.png')),
         ];
     }
 
@@ -320,6 +327,17 @@ class AvailabilityBannerController extends Controller
                 'name' => '',
                 'location' => 'Indonesia',
             ],
+        ];
+    }
+
+    /**
+     * @return array{contact_email: string, facebook_page: string}
+     */
+    private function defaultFooter(): array
+    {
+        return [
+            'contact_email' => 'jiwerrawda@gmail.com',
+            'facebook_page' => 'Jiwer Rawda For Hotels',
         ];
     }
 }

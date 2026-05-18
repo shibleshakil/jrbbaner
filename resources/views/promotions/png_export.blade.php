@@ -16,7 +16,7 @@
             margin: 0;
             padding: 0;
             width: 1130px;
-            height: 1600px;
+            height: 1630px;
             overflow: hidden;
             font-family: 'Segoe UI', Roboto, Arial, sans-serif;
             background: #fff;
@@ -27,7 +27,7 @@
 
         .banner {
             width: 1130px;
-            height: 1600px;
+            height: 1630px;
             position: relative;
             background: #fff;
         }
@@ -279,7 +279,7 @@
         .footer {
             position: absolute;
             left: 0;
-            bottom: 0;
+            bottom: 30px;
             width: 1130px;
             height: 150px;
             background: #064e75;
@@ -326,8 +326,21 @@
             font-weight: 600;
         }
 
-        tbody tr:nth-child(odd) td {
-            background: #f6e23257;
+        .footer-link {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 1130px;
+            height: 30px;
+            color: #fff;
+            padding: 0 30px 0;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cg fill='none' stroke='%2395c7d6' stroke-width='0.8' opacity='0.35'%3E%3Ccircle cx='50' cy='0' r='50'/%3E%3Ccircle cx='50' cy='100' r='50'/%3E%3Ccircle cx='0' cy='50' r='50'/%3E%3Ccircle cx='100' cy='50' r='50'/%3E%3Ccircle cx='50' cy='50' r='35'/%3E%3C/g%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 30px 30px;
         }
     </style>
 </head>
@@ -382,6 +395,8 @@
     }
     $contacts[$i]['location'] = $fallbackContacts[$i]['location'] ?? 'Indonesia';
     }
+    $contactEmail = filled($promotion->contact_email) ? $promotion->contact_email : 'jiwerrawda@gmail.com';
+    $facebookPage = filled($promotion->facebook_page) ? $promotion->facebook_page : 'Jiwer Rawda For Hotels';
     @endphp
     <div class="banner">
         <img class="hero" src="{{ $bannerAssets['hero'] }}" alt="" width="1130" height="560">
@@ -489,6 +504,20 @@
                     <div class="footer-loc">{{ $c['location'] }}</div>
                 </div>
                 @endforeach
+            </div>
+        </div>
+        <div class="footer-link">
+            <div style="display: flex; gap: 8px; align-items: center;">
+                @if (! empty($footerIcons['mail']))
+                <img src="{{ $footerIcons['mail'] }}" alt="" width="18" height="18">
+                @endif
+                <div style=" color: #064e75; font-size: 24px; font-weight: 700;">{{ $contactEmail }}</div>
+            </div>
+            <div style="display: flex; gap: 8px; align-items: center;">
+                @if (! empty($footerIcons['facebook']))
+                <img src="{{ $footerIcons['facebook'] }}" alt="" width="18" height="18">
+                @endif
+                <div style=" color: #064e75; font-size: 24px; font-weight: 700;">{{ $facebookPage }}</div>
             </div>
         </div>
     </div>

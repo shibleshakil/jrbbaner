@@ -24,6 +24,7 @@ class PromotionController extends Controller
     {
         return view('promotions.create', [
             'defaultContacts' => $this->defaultFooterContacts(),
+            'defaultFooter' => $this->defaultFooter(),
         ]);
     }
 
@@ -55,6 +56,8 @@ class PromotionController extends Controller
             'contacts.2.number' => ['nullable', 'string', 'max:80', 'required_with:contacts.2.name'],
             'contacts.2.name' => ['nullable', 'string', 'max:120', 'required_with:contacts.2.number'],
             'contacts.2.location' => ['nullable', 'string', 'max:120'],
+            'contact_email' => ['nullable', 'string', 'max:50'],
+            'facebook_page' => ['nullable', 'string', 'max:120'],
         ]);
 
         $contactInfo = [
@@ -98,6 +101,8 @@ class PromotionController extends Controller
                 'room_image_3_path' => $roomImage3Path,
                 'room_image_4_path' => $roomImage4Path,
                 'contact_info' => $contactInfo,
+                'contact_email' => $validated['contact_email'],
+                'facebook_page' => $validated['facebook_page'],
             ]);
 
             foreach ($validated['offers'] as $index => $offer) {
@@ -124,7 +129,7 @@ class PromotionController extends Controller
             if (str_contains($message, 'missing') || str_contains($message, 'Could not read')) {
                 return redirect()
                     ->route('promotions.index')
-                    ->with('error', 'Promotion was saved but PNG generation failed: '.$message);
+                    ->with('error', 'Promotion was saved but PNG generation failed: ' . $message);
             }
 
             return redirect()
@@ -155,8 +160,8 @@ class PromotionController extends Controller
 
         if ($relativePath && Storage::disk('public')->exists($relativePath)) {
             return response()->download(
-                storage_path('app/public/'.$relativePath),
-                'promotion-banner-'.$promotion->id.'.png'
+                storage_path('app/public/' . $relativePath),
+                'promotion-banner-' . $promotion->id . '.png'
             );
         }
 
@@ -182,8 +187,8 @@ class PromotionController extends Controller
         }
 
         return response()->download(
-            storage_path('app/public/'.$relativePath),
-            'promotion-banner-'.$promotion->id.'.png'
+            storage_path('app/public/' . $relativePath),
+            'promotion-banner-' . $promotion->id . '.png'
         );
     }
 
@@ -192,7 +197,7 @@ class PromotionController extends Controller
         $promotion->load('offerDetails');
 
         try {
-            $absolutePath = storage_path('app/public/'.$this->savePromotionPngThroughHtmlExport($promotion));
+            $absolutePath = storage_path('app/public/' . $this->savePromotionPngThroughHtmlExport($promotion));
         } catch (Throwable $e) {
             report($e);
 
@@ -213,7 +218,7 @@ class PromotionController extends Controller
 
         return response()->download(
             $absolutePath,
-            'promotion-banner-'.$promotion->id.'.png'
+            'promotion-banner-' . $promotion->id . '.png'
         );
     }
 
@@ -227,23 +232,23 @@ class PromotionController extends Controller
         $promotion->load('offerDetails');
 
         $heroPath = $promotion->hero_banner_path && Storage::disk('public')->exists($promotion->hero_banner_path)
-            ? storage_path('app/public/'.$promotion->hero_banner_path)
+            ? storage_path('app/public/' . $promotion->hero_banner_path)
             : public_path('promotion-assets/banner-1s.png');
         $logoPath = $promotion->logo_path && Storage::disk('public')->exists($promotion->logo_path)
-            ? storage_path('app/public/'.$promotion->logo_path)
+            ? storage_path('app/public/' . $promotion->logo_path)
             : public_path('app-assets/images/logo/logo.png');
 
         $roomImage1Path = $promotion->room_image_1_path && Storage::disk('public')->exists($promotion->room_image_1_path)
-            ? storage_path('app/public/'.$promotion->room_image_1_path)
+            ? storage_path('app/public/' . $promotion->room_image_1_path)
             : public_path('promotion-assets/room-1.jpg');
         $roomImage2Path = $promotion->room_image_2_path && Storage::disk('public')->exists($promotion->room_image_2_path)
-            ? storage_path('app/public/'.$promotion->room_image_2_path)
+            ? storage_path('app/public/' . $promotion->room_image_2_path)
             : public_path('promotion-assets/room-2.jpg');
         $roomImage3Path = $promotion->room_image_3_path && Storage::disk('public')->exists($promotion->room_image_3_path)
-            ? storage_path('app/public/'.$promotion->room_image_3_path)
+            ? storage_path('app/public/' . $promotion->room_image_3_path)
             : public_path('promotion-assets/room-3.jpg');
         $roomImage4Path = $promotion->room_image_4_path && Storage::disk('public')->exists($promotion->room_image_4_path)
-            ? storage_path('app/public/'.$promotion->room_image_4_path)
+            ? storage_path('app/public/' . $promotion->room_image_4_path)
             : public_path('promotion-assets/room-4.jpg');
 
         $bannerAssets = [
@@ -266,19 +271,21 @@ class PromotionController extends Controller
         $footerIcons = [
             'whatsapp' => $this->imageDataUri(public_path('promotion-assets/icons/whatsapp.png')),
             'phone' => $this->imageDataUri(public_path('promotion-assets/icons/phone.png')),
+            'mail' => $this->imageDataUri(public_path('promotion-assets/icons/mail.png')),
+            'facebook' => $this->imageDataUri(public_path('promotion-assets/icons/facebook_dark.png')),
         ];
 
         $html = view('promotions.png_export', compact('promotion', 'bannerAssets', 'footerIcons'))->render();
 
-        $relativePath = 'generated-banners/promotion-'.$promotion->id.'-html.png';
-        $absolutePath = storage_path('app/public/'.$relativePath);
+        $relativePath = 'generated-banners/promotion-' . $promotion->id . '.png';
+        $absolutePath = storage_path('app/public/' . $relativePath);
         $dir = dirname($absolutePath);
         if (! is_dir($dir)) {
             mkdir($dir, 0755, true);
         }
 
         $browsershot = Browsershot::html($html)
-            ->windowSize(1130, 1600)
+            ->windowSize(1130, 1630)
             ->timeout(120)
             ->waitUntilNetworkIdle();
 
@@ -315,7 +322,7 @@ class PromotionController extends Controller
 
         $mime = @mime_content_type($absolutePath) ?: 'image/png';
 
-        return 'data:'.$mime.';base64,'.base64_encode($contents);
+        return 'data:' . $mime . ';base64,' . base64_encode($contents);
     }
 
     /**
@@ -339,6 +346,17 @@ class PromotionController extends Controller
                 'name' => '',
                 'location' => 'Indonesia',
             ],
+        ];
+    }
+
+    /**
+     * @return list<array{number: string, name: string, location: string}>
+     */
+    private function defaultFooter(): array
+    {
+        return [
+            'contact_email' => 'jiwerrawda@gmail.com',
+            'facebook_page' => 'Jiwer Rawda For Hotels',
         ];
     }
 }

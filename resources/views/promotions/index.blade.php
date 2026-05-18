@@ -27,9 +27,9 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Hotel</th>
                                                 <th>Download</th>
-                                                <th>Total Offer</th>
+                                                <th>Hotel Name</th>
+                                                <th>Offer Details</th>
                                                 <th>Banner</th>
                                             </tr>
                                         </thead>
@@ -67,7 +67,9 @@
                                                 </td>
                                                 <td>
                                                     @if ($promotion->generated_banner_path)
-                                                    <img src="{{ route('promotions.preview', $promotion) }}" alt="banner" style="height: 140px;">
+                                                    <a href="{{ route('promotions.preview', $promotion) }}" target="_blank" rel="noopener noreferrer">
+                                                        <img src="{{ route('promotions.preview', $promotion) }}" alt="banner" style="height: 140px;">
+                                                    </a>
                                                     @else
                                                     Not generated
                                                     @endif

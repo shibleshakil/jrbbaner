@@ -21,6 +21,8 @@ class Promotion extends Model
         'room_image_4_path',
         'generated_banner_path',
         'contact_info',
+        'contact_email',
+        'facebook_page',
     ];
 
     protected $casts = [

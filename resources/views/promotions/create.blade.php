@@ -124,6 +124,17 @@
                                         </div>
                                     </div>
 
+                                    <div class="row">
+                                        <div class="col-md-6 form-group">
+                                            <label>Contact Email</label>
+                                            <input type="text" name="contact_email" class="form-control" value="{{ old('contact_email', $defaultFooter['contact_email']) }}">
+                                        </div>
+                                        <div class="col-md-6 form-group">
+                                            <label>Facebook Page</label>
+                                            <input type="text" name="facebook_page" class="form-control" value="{{ old('facebook_page', $defaultFooter['facebook_page']) }}">
+                                        </div>
+                                    </div>
+
                                     <div class="mt-3">
                                         <button type="submit" class="btn btn-primary">Generate Banner</button>
                                     </div>

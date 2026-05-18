@@ -49,7 +49,9 @@
                                                 <td>{{ $banner->to_date->format('Y-m-d') }}</td>
                                                 <td>
                                                     @if ($banner->generated_banner_path)
-                                                    <img src="{{ route('availability_banners.preview', $banner) }}" alt="banner" style="height: 140px;">
+                                                    <a href="{{ route('availability_banners.preview', $banner) }}" target="_blank" rel="noopener noreferrer">
+                                                        <img src="{{ route('availability_banners.preview', $banner) }}" alt="banner" style="height: 140px;">
+                                                    </a>
                                                     @else
                                                     Not generated
                                                     @endif

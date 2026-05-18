@@ -20,6 +20,8 @@ class AvailabilityBanner extends Model
         'image_2_path',
         'image_3_path',
         'contact_info',
+        'contact_email',
+        'facebook_page',
     ];
 
     protected $casts = [

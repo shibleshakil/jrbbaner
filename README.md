@@ -7,6 +7,18 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## Promotion banner PNG export
+
+Promotion banners are rendered from `resources/views/promotions/png_export.blade.php` via Browsershot at **1130×1630** px. The footer contact bar (`.footer-link`, email and Facebook row) sits in the bottom 30px of the canvas; `html`/`body` height must match the banner height or that strip is clipped from the PNG.
+
+Footer email and Facebook label come from each promotion’s `contact_email` and `facebook_page` fields (see migration `add_contact_email_n_facebook_link_in_all_promotions`).
+
+## Availability banner PNG export
+
+Availability (“last availability”) banners are rendered from `resources/views/availability_banners/banner_export.blade.php` via Browsershot at **1200×1213** px. The footer contact bar (`.footer-link`, email and Facebook row) sits in the bottom 30px of the canvas; `html`/`body` height must match the banner height or that strip is clipped from the PNG.
+
+Footer email and Facebook label come from each banner’s `contact_email` and `facebook_page` fields (same migration as promotions).
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
