@@ -25,13 +25,13 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', [HomeController::class, 'index'])->name('home');
 
-    // Route::get('/profile/{name}', [AccountController::class, 'viewProfile'])->name('profile');
-    // Route::post('/profile/{name}', [AccountController::class, 'updateProfile']);
+    Route::get('/profile/{name}', [AccountController::class, 'viewProfile'])->name('profile');
+    Route::post('/profile/{name}', [AccountController::class, 'updateProfile']);
 
-    // Route::group(['prefix' => 'password', 'as' => 'password.'], function () {
-    //     Route::get('update', [AccountController::class, 'showPasswordForm'])->name('update');
-    //     Route::post('update', [AccountController::class, 'updatePassword']);
-    // });
+    Route::group(['prefix' => 'password', 'as' => 'password.'], function () {
+        Route::get('update', [AccountController::class, 'showPasswordForm'])->name('update');
+        Route::post('update', [AccountController::class, 'updatePassword']);
+    });
 
     Route::get('/promotions', [PromotionController::class, 'index'])->name('promotions.index');
     Route::get('/promotions/create', [PromotionController::class, 'create'])->name('promotions.create');
