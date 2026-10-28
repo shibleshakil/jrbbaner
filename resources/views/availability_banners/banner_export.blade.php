@@ -14,10 +14,11 @@
         @font-face {
             font-family: 'ArbFONTS-ae-almohanad';
             src: url("{{ $arabicFontUri ?? '' }}") format('truetype'),
-                 url("{{ asset('fonts/ArbFONTS-ae-almohanad.ttf') }}") format('truetype');
+            url("{{ asset('fonts/ArbFONTS-ae-almohanad.ttf') }}") format('truetype');
             font-weight: normal;
             font-style: normal;
         }
+
         * {
             box-sizing: border-box;
         }
@@ -354,17 +355,17 @@
                 <div class="en-brand">Jiwer Rawda For Hotels</div>
             </div>
             <div class="stars">
-                <img src="{{asset('public/promotion-assets/icons/star.png')}}" alt="">
-                <img src="{{asset('public/promotion-assets/icons/star.png')}}" alt="">
-                <img src="{{asset('public/promotion-assets/icons/star.png')}}" alt="">
-                <img src="{{asset('public/promotion-assets/icons/star.png')}}" alt="">
+                <img src="{{asset('promotion-assets/icons/star.png')}}" alt="">
+                <img src="{{asset('promotion-assets/icons/star.png')}}" alt="">
+                <img src="{{asset('promotion-assets/icons/star.png')}}" alt="">
+                <img src="{{asset('promotion-assets/icons/star.png')}}" alt="">
             </div>
             <h1 class="hotel-title">{{ $banner->hotel_name }}</h1>
 
             <!-- last availability last-availability -->
 
             <div class="avilability">
-                <img src="{{asset('public/promotion-assets/availability.png')}}" alt="Last availability">
+                <img src="{{asset('promotion-assets/availability.png')}}" alt="Last availability">
             </div>
 
             <div class="rate">

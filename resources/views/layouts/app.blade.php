@@ -7,41 +7,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
     <title>{{env('APP_NAME') }} | @yield('title')</title>
-    <link rel="apple-touch-icon" href="{{ asset('public/app-assets/images/ico/apple-icon-120.png') }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('public/app-assets/images/ico/favicon.ico') }}">
+    <link rel="apple-touch-icon" href="{{ asset('app-assets/images/ico/apple-icon-120.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('app-assets/images/ico/favicon.ico') }}">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i%7COpen+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/app-assets/vendors/css/vendors.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/vendors.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset ('public/app-assets/vendors/css/forms/selects/select2.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/app-assets/vendors/css/charts/jquery-jvectormap-2.0.3.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/app-assets/vendors/css/charts/morris.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/app-assets/vendors/css/extensions/unslider.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/app-assets/vendors/css/weather-icons/climacons.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/charts/jquery-jvectormap-2.0.3.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/charts/morris.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/unslider.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/weather-icons/climacons.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset ('public/app-assets/vendors/css/tables/datatable/datatables.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset ('public/app-assets/css/plugins/forms/form-inputs-groups.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset ('public/app-assets/fonts/simple-line-icons/style.min.css') }}">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/app-assets/css/bootstrap.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/app-assets/css/bootstrap-extended.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/app-assets/css/colors.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/app-assets/css/components.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/bootstrap-extended.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/colors.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/components.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset ('public/app-assets/vendors/css/extensions/sweetalert2.min.css')}}">
     <!-- END: Theme CSS-->
 
     <!-- BEGIN: Page CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/app-assets/css/core/colors/palette-gradient.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/colors/palette-gradient.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset ('public/assets/css/dropify.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset ('public/app-assets/vendors/css/pickers/datetime/bootstrap-datetimepicker.css')}}">
     <link rel="stylesheet" type="text/css" href="{{ asset ('public/app-assets/vendors/css/pickers/pickadate/pickadate.css')}}">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/app-assets/css/pages/app-invoice.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('public/assets/css/style.css?v1') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/pages/app-invoice.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css?v1') }}">
     <!-- END: Custom CSS-->
 
     @yield('css')
@@ -80,7 +80,7 @@
 
 
     <!-- BEGIN: Vendor JS-->
-    <script src=" {{ asset('public/app-assets/vendors/js/vendors.min.js') }}"></script>
+    <script src=" {{ asset('app-assets/vendors/js/vendors.min.js') }}"></script>
     <!-- BEGIN Vendor JS-->
 
     <!-- BEGIN: Page Vendor JS-->
@@ -88,19 +88,19 @@
     <!-- END: Page Vendor JS-->
 
     <!-- BEGIN: Theme JS-->
-    <script src=" {{ asset('public/app-assets/js/core/app-menu.js') }}"></script>
-    <script src=" {{ asset('public/app-assets/js/core/app.js') }}"></script>
+    <script src=" {{ asset('app-assets/js/core/app-menu.js') }}"></script>
+    <script src=" {{ asset('app-assets/js/core/app.js') }}"></script>
     <script src="{{ asset ('public/app-assets/vendors/js/extensions/sweetalert2.all.min.js')}}"></script>
-    <script src="{{ asset('public/app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
-    <script src="{{ asset('public/app-assets/vendors/js/tables/datatable/datatables.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.min.js') }}"></script>
 
-    <script src="{{ asset('public/app-assets/vendors/js/tables/datatable/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('public/app-assets/vendors/js/tables/buttons.flash.min.js') }}"></script>
-    <script src="{{ asset('public/app-assets/vendors/js/tables/jszip.min.js') }}"></script>
-    <script src="{{ asset('public/app-assets/vendors/js/tables/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('public/app-assets/vendors/js/tables/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('public/app-assets/vendors/js/tables/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('public/app-assets/vendors/js/tables/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/datatable/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/buttons.flash.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/jszip.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('app-assets/vendors/js/tables/buttons.print.min.js') }}"></script>
 
     <script src="{{ asset ('public/app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js')}}"></script>
     <script src="{{ asset ('public/app-assets/vendors/js/pickers/dateTime/bootstrap-datetimepicker.min.js')}}"></script>
@@ -111,7 +111,7 @@
     <script src="{{ asset ('public/assets/js/dropify.min.js')}}"></script>
     <script src="{{ asset ('public/assets/js/scripts.js?v7')}}"></script>
     <script src="{{ asset ('public/assets/js/datatable.js')}}"></script>
-    <script src="{{ asset('public/app-assets/js/scripts/pickers/dateTime/bootstrap-datetime.js') }}"></script>
+    <script src="{{ asset('app-assets/js/scripts/pickers/dateTime/bootstrap-datetime.js') }}"></script>
     <!-- END: Theme JS-->
     <script type="text/javascript">
         $(function() {

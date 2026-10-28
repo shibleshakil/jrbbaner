@@ -10,12 +10,12 @@
 <body>
     @include('availability_banners._banner_body', [
     'banner' => $banner,
-    'sidebarLogo' => asset('public/promotion-assets/banner-1ns.png'),
-    'stack1' => asset('public/promotion-assets/hotel-1.webp'),
-    'stack2' => asset('public/promotion-assets/room-2.jpg'),
-    'stack3' => asset('public/promotion-assets/room-3.jpg'),
-    'iconPhone' => asset('public/promotion-assets/icons/phone.png'),
-    'iconWhatsapp' => asset('public/promotion-assets/icons/whatsapp.png'),
+    'sidebarLogo' => asset('promotion-assets/banner-1ns.png'),
+    'stack1' => asset('promotion-assets/hotel-1.webp'),
+    'stack2' => asset('promotion-assets/room-2.jpg'),
+    'stack3' => asset('promotion-assets/room-3.jpg'),
+    'iconPhone' => asset('promotion-assets/icons/phone.png'),
+    'iconWhatsapp' => asset('promotion-assets/icons/whatsapp.png'),
     ])
 </body>
 

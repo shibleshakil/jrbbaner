@@ -8,7 +8,7 @@
             <div class="card border-grey border-lighten-3 m-0">
                 <div class="card-header border-0">
                     <div class="card-title text-center">
-                        <div class="p-1"><img src=" {{ asset('public/app-assets/images/logo/logo.png') }}" alt="branding logo" width="180" height="180"></div>
+                        <div class="p-1"><img src=" {{ asset('app-assets/images/logo/logo.png') }}" alt="branding logo" width="180" height="180"></div>
                     </div>
                     <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 m-0"><span>{{ __('Confirm Password') }}</span></h6>
                 </div>
@@ -20,23 +20,23 @@
 
                             <fieldset class="form-group position-relative has-icon-left">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"
-                                 required autocomplete="current-password">
+                                    required autocomplete="current-password">
                                 <div class="form-control-position">
                                     <i class="fa fa-key"></i>
                                 </div>
 
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </fieldset>
                             <fieldset class="form-group position-relative has-icon-left">
                                 <button type="submit" class="btn btn-primary btn-lg btn-block"><i class="feather icon-unlock"></i> {{ __('Confirm Password') }}</button>
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
                                 @endif
                             </fieldset>
 

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Helpers\ImageHelper;
+// use App\Helpers\ImageHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -31,9 +31,9 @@ class AccountController extends Controller
             $data->email = $request->email;
             $data->name = $request->name;
 
-            if ($file = $request->file('image')) {
-                $data->image = ImageHelper::handleUpdatedUploadedImage($file, '/storage', $data, 'image');
-            }
+            // if ($file = $request->file('image')) {
+            //     $data->image = ImageHelper::handleUpdatedUploadedImage($file, '/storage', $data, 'image');
+            // }
 
             $data->save();
 

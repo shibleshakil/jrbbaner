@@ -7,7 +7,7 @@
                             class="feather icon-menu font-large-1"></i></a></li>
                 <li class="nav-item"><a class="navbar-brand"
                         href=" {{ route('home') }}"><img class="brand-logo"
-                            alt="EMS logo" src=" {{ asset('public/app-assets/images/logo/logo-1.png') }}" width="32" height="32">
+                            alt="EMS logo" src=" {{ asset('app-assets/images/logo/logo-1.png') }}" width="32" height="32">
                         <h2 class="brand-text">JR BANNER</h2>
                     </a></li>
                 <li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse"
@@ -26,8 +26,8 @@
                     <li class="dropdown dropdown-user nav-item"><a
                             class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                             <div class="avatar avatar-online"><img
-                                    src="{{auth()->user()->image ? asset('public/'.auth()->user()->image)
-                                    : asset('public/app-assets/images/portrait/small/avatar-s-1.png') }}"
+                                    src="{{auth()->user()->image ? asset(''.auth()->user()->image)
+                                    : asset('app-assets/images/portrait/small/avatar-s-1.png') }}"
                                     alt="avatar"><i></i></div><span class="user-name">{{auth()->user()->name}}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right">

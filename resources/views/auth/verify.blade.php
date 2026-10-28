@@ -8,7 +8,7 @@
             <div class="card border-grey border-lighten-3 m-0">
                 <div class="card-header border-0">
                     <div class="card-title text-center">
-                        <div class="p-1"><img src=" {{ asset('public/app-assets/images/logo/logo.png') }}" alt="branding logo" width="180" height="180"></div>
+                        <div class="p-1"><img src=" {{ asset('app-assets/images/logo/logo.png') }}" alt="branding logo" width="180" height="180"></div>
                     </div>
                     <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 m-0"><span>{{ __('Verify Your Email Address') }}</span></h6>
                 </div>

@@ -9,7 +9,7 @@
                 <div class="card-header border-0">
                     <div class="card-title text-center">
                         <div class="p-1">
-                            <img src=" {{ asset('public/app-assets/images/logo/logo.png') }}"
+                            <img src=" {{ asset('app-assets/images/logo/logo.png') }}"
                                 alt="branding logo" width="180" height="180">
                         </div>
                     </div>
