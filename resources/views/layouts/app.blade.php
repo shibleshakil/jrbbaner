@@ -13,14 +13,14 @@
 
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/vendors.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset ('public/app-assets/vendors/css/forms/selects/select2.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset ('app-assets/vendors/css/forms/selects/select2.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/charts/jquery-jvectormap-2.0.3.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/charts/morris.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/extensions/unslider.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/vendors/css/weather-icons/climacons.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset ('public/app-assets/vendors/css/tables/datatable/datatables.min.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset ('public/app-assets/css/plugins/forms/form-inputs-groups.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset ('public/app-assets/fonts/simple-line-icons/style.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset ('app-assets/vendors/css/tables/datatable/datatables.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset ('app-assets/css/plugins/forms/form-inputs-groups.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset ('app-assets/fonts/simple-line-icons/style.min.css') }}">
     <!-- END: Vendor CSS-->
 
     <!-- BEGIN: Theme CSS-->
@@ -28,15 +28,15 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/bootstrap-extended.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/colors.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/components.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset ('public/app-assets/vendors/css/extensions/sweetalert2.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset ('app-assets/vendors/css/extensions/sweetalert2.min.css')}}">
     <!-- END: Theme CSS-->
 
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('app-assets/css/core/colors/palette-gradient.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset ('public/assets/css/dropify.min.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset ('public/app-assets/vendors/css/pickers/datetime/bootstrap-datetimepicker.css')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset ('public/app-assets/vendors/css/pickers/pickadate/pickadate.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset ('assets/css/dropify.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset ('app-assets/vendors/css/pickers/datetime/bootstrap-datetimepicker.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset ('app-assets/vendors/css/pickers/pickadate/pickadate.css')}}">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
@@ -90,7 +90,7 @@
     <!-- BEGIN: Theme JS-->
     <script src=" {{ asset('app-assets/js/core/app-menu.js') }}"></script>
     <script src=" {{ asset('app-assets/js/core/app.js') }}"></script>
-    <script src="{{ asset ('public/app-assets/vendors/js/extensions/sweetalert2.all.min.js')}}"></script>
+    <script src="{{ asset ('app-assets/vendors/js/extensions/sweetalert2.all.min.js')}}"></script>
     <script src="{{ asset('app-assets/vendors/js/forms/select/select2.full.min.js') }}"></script>
     <script src="{{ asset('app-assets/vendors/js/tables/datatable/datatables.min.js') }}"></script>
 
@@ -102,15 +102,15 @@
     <script src="{{ asset('app-assets/vendors/js/tables/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('app-assets/vendors/js/tables/buttons.print.min.js') }}"></script>
 
-    <script src="{{ asset ('public/app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js')}}"></script>
-    <script src="{{ asset ('public/app-assets/vendors/js/pickers/dateTime/bootstrap-datetimepicker.min.js')}}"></script>
-    <script src="{{ asset ('public/app-assets/vendors/js/pickers/pickadate/picker.js')}}"></script>
-    <script src="{{ asset ('public/app-assets/vendors/js/pickers/pickadate/picker.date.js')}}"></script>
+    <script src="{{ asset ('app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js')}}"></script>
+    <script src="{{ asset ('app-assets/vendors/js/pickers/dateTime/bootstrap-datetimepicker.min.js')}}"></script>
+    <script src="{{ asset ('app-assets/vendors/js/pickers/pickadate/picker.js')}}"></script>
+    <script src="{{ asset ('app-assets/vendors/js/pickers/pickadate/picker.date.js')}}"></script>
 
-    <script src="{{ asset ('public/assets/js/dropify-init.js')}}"></script>
-    <script src="{{ asset ('public/assets/js/dropify.min.js')}}"></script>
-    <script src="{{ asset ('public/assets/js/scripts.js?v7')}}"></script>
-    <script src="{{ asset ('public/assets/js/datatable.js')}}"></script>
+    <script src="{{ asset ('assets/js/dropify-init.js')}}"></script>
+    <script src="{{ asset ('assets/js/dropify.min.js')}}"></script>
+    <script src="{{ asset ('assets/js/scripts.js?v7')}}"></script>
+    <script src="{{ asset ('assets/js/datatable.js')}}"></script>
     <script src="{{ asset('app-assets/js/scripts/pickers/dateTime/bootstrap-datetime.js') }}"></script>
     <!-- END: Theme JS-->
     <script type="text/javascript">
